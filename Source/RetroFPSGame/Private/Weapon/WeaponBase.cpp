@@ -5,7 +5,6 @@
 #include "Components/SceneCaptureComponent2D.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/PointLightComponent.h"
-
 // Sets default values
 AWeaponBase::AWeaponBase()
 {
@@ -14,12 +13,20 @@ AWeaponBase::AWeaponBase()
 
 	Camera = CreateDefaultSubobject<USceneCaptureComponent2D>("Camera");
 	Camera->SetupAttachment(RootComponent);
+	Camera->ProjectionType = ECameraProjectionMode::Orthographic;
+	Camera->OrthoWidth = 426.f;
 
 	WeaponFlipbook = CreateDefaultSubobject<UPaperFlipbookComponent>("Weapon Flipbook");
 	WeaponFlipbook->SetupAttachment(Camera);
+	WeaponFlipbook->SetRelativeLocation(FVector(0, 100, -50));
+	WeaponFlipbook->SetRelativeRotation(FRotator(0, 0, 90));
+	WeaponFlipbook->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	PointLight = CreateDefaultSubobject<UPointLightComponent>("Point Light");
 	PointLight->SetupAttachment(Camera);
+	PointLight->SetIntensity(10000.f);
+	PointLight->SetAttenuationRadius(800.f);
+	PointLight->SetHiddenInGame(true);
 }
 
 void AWeaponBase::InitializeWeapon_Implementation()
