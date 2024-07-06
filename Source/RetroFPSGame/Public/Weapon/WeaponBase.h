@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Interfaces/IPlayerWeapon.h"
 #include "WeaponBase.generated.h"
 
 class USceneCaptureComponent2D;
@@ -11,13 +12,15 @@ class UPaperFlipbookComponent;
 class UPointLightComponent;
 
 UCLASS()
-class RETROFPSGAME_API AWeaponBase : public AActor
+class RETROFPSGAME_API AWeaponBase : public AActor, public IIPlayerWeapon
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
 	AWeaponBase();
+
+	virtual void InitializeWeapon_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned

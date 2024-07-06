@@ -22,6 +22,12 @@ AWeaponBase::AWeaponBase()
 	PointLight->SetupAttachment(Camera);
 }
 
+void AWeaponBase::InitializeWeapon_Implementation()
+{
+	WeaponFlipbook->SetFlipbook(nullptr);
+	WeaponFlipbook->SetHiddenInGame(true);
+}
+
 // Called when the game starts or when spawned
 void AWeaponBase::BeginPlay()
 {
