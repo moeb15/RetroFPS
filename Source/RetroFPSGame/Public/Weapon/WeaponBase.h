@@ -22,6 +22,9 @@ public:
 
 	virtual void InitializeWeapon_Implementation() override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void WeaponBob(bool IsMoving, float DeltaTime);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

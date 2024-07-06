@@ -11,6 +11,7 @@
 #include "InputAction.h"
 #include "HUD/PlayerHUD.h"
 #include "Weapon/WeaponBase.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AFPSCharacter::AFPSCharacter()
@@ -53,6 +54,9 @@ void AFPSCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	bool isMoving = GetCharacterMovement()->Velocity.Size() > 0;
+	AWeaponBase* Weapon = Cast<AWeaponBase>(WeaponActor->GetChildActor());
+	Weapon->WeaponBob(isMoving, DeltaTime);
 }
 
 // Called to bind functionality to input
