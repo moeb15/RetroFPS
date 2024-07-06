@@ -10,6 +10,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class UPlayerHUD;
+class UChildActorComponent;
 struct FInputActionValue;
 
 UCLASS()
@@ -52,6 +53,10 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = HUD,
 		meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<UPlayerHUD> PlayerHUDClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Weapon,
+		meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UChildActorComponent> WeaponActor;
 
 	UPROPERTY()
 	TObjectPtr<UPlayerHUD> PlayerHUD;

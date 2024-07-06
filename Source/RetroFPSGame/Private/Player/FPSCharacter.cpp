@@ -4,6 +4,7 @@
 #include "Player/FPSCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/ChildActorComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
@@ -24,6 +25,10 @@ AFPSCharacter::AFPSCharacter()
 	FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>("First Person Camera");
 	FirstPersonCamera->SetupAttachment(RootComponent);
 	FirstPersonCamera->bUsePawnControlRotation = true;
+
+	WeaponActor = CreateDefaultSubobject<UChildActorComponent>("Weapon Actor");
+	WeaponActor->SetupAttachment(FirstPersonCamera);
+
 }
 
 // Called when the game starts or when spawned
