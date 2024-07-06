@@ -10,6 +10,7 @@
 #include "InputActionValue.h"
 #include "InputAction.h"
 #include "HUD/PlayerHUD.h"
+#include "Weapon/WeaponBase.h"
 
 // Sets default values
 AFPSCharacter::AFPSCharacter()
@@ -42,6 +43,9 @@ void AFPSCharacter::BeginPlay()
 		check(PlayerHUD);
 		PlayerHUD->AddToPlayerScreen();
 	}
+	if (WeaponType) {
+		EquipWeapon(WeaponType);
+	}
 }
 
 // Called every frame
@@ -69,6 +73,15 @@ void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 		
 		// Looking
 		EIC->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFPSCharacter::Look);
+	}
+}
+
+void AFPSCharacter::EquipWeapon(TSubclassOf<AWeaponBase> WeaponClass)
+{
+	WeaponType = WeaponClass;
+	WeaponActor->SetChildActorClass(WeaponType);
+	if (WeaponType->ImplementsInterface(UIPlayerWeapon::StaticClass())) {
+		IIPlayerWeapon::Execute_InitializeWeapon(WeaponActor->GetChildActor());
 	}
 }
 

@@ -6,11 +6,13 @@
 #include "GameFramework/Character.h"
 #include "FPSCharacter.generated.h"
 
+
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class UPlayerHUD;
 class UChildActorComponent;
+class AWeaponBase;
 struct FInputActionValue;
 
 UCLASS()
@@ -32,6 +34,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void EquipWeapon(TSubclassOf<AWeaponBase> WeaponClass);
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera,
@@ -57,6 +61,10 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Weapon,
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UChildActorComponent> WeaponActor;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Weapon,
+		meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AWeaponBase> WeaponType;
 
 	UPROPERTY()
 	TObjectPtr<UPlayerHUD> PlayerHUD;
