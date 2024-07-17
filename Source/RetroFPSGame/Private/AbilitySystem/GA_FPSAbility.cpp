@@ -2,7 +2,10 @@
 
 
 #include "AbilitySystem/GA_FPSAbility.h"
-#include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
+/*#include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
+#include "Abilities/Tasks/AbilityTask_WaitDelay.h"
 
 void UGA_FPSAbility::ActivateAbility(
 	const FGameplayAbilitySpecHandle Handle, 
@@ -10,16 +13,29 @@ void UGA_FPSAbility::ActivateAbility(
 	const FGameplayAbilityActivationInfo ActivationInfo, 
 	const FGameplayEventData* TriggerEventData)
 {
-	CommitAbility(Handle, ActorInfo, ActivationInfo);
+	if (CommitAbility(Handle, ActorInfo, ActivationInfo)) {
+		WaitFor();
+		FireWeapon();
+		GameplayEventWaitDelayTask = UAbilityTask_WaitDelay::WaitDelay(this, AbilityCooldown);
+		EndAbility()
+		GameplayEventWaitDelayTask->OnFinish.AddDynamic()
+	}
 
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 }
 
-UAbilityTask_WaitGameplayEvent* UGA_FPSAbility::WaitFor()
+void UGA_FPSAbility::WaitFor()
 {
 	GameplayEventWaitTask = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, WeaponEventTag);
-	//ApplyGameplayEffectSpecToTarget();
-	return GameplayEventWaitTask;
+	UAbilitySystemComponent* OwnerASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(
+		GameplayEventWaitTask->GetOwnerActor());
+
+	if (OwnerASC && GameplayEventWaitTask->IsFinished()) {
+		FGameplayEffectContextHandle GE_Handle = OwnerASC->MakeEffectContext();
+		FGameplayEffectSpecHandle GE_Spec = OwnerASC->MakeOutgoingSpec(WeaponGameplayEffectClass, 1, GE_Handle);
+		OwnerASC->ApplyGameplayEffectSpecToTarget(*GE_Spec.Data.Get(),
+			GameplayEventWaitTask->GetTargetASC());
+	}
 }
 
 bool UGA_FPSAbility::CommitAbility(
@@ -28,6 +44,6 @@ bool UGA_FPSAbility::CommitAbility(
 	const FGameplayAbilityActivationInfo ActivationInfo, 
 	OUT FGameplayTagContainer* OptionalRelevantTags)
 {
-
-	return false;
+	return Super::CommitAbility(Handle, ActorInfo, ActivationInfo, OptionalRelevantTags);
 }
+*/

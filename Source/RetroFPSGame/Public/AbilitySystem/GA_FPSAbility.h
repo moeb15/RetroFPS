@@ -8,7 +8,9 @@
 #include "GA_FPSAbility.generated.h"
 
 
+class UGameplayEffect;
 class UAbilityTask_WaitGameplayEvent;
+class UAbilityTask_WaitDelay;
 /**
  * 
  */
@@ -16,7 +18,7 @@ UCLASS()
 class RETROFPSGAME_API UGA_FPSAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
-	
+/*
 protected:
 	virtual void ActivateAbility(
 		const FGameplayAbilitySpecHandle Handle,
@@ -25,7 +27,12 @@ protected:
 		const FGameplayEventData* TriggerEventData) override;
 
 public:
-	UAbilityTask_WaitGameplayEvent* WaitFor();
+	UFUNCTION(BlueprintNativeEvent)
+	void FireWeapon();
+	virtual void FireWeapon_Implementation() = 0;
+
+	UFUNCTION(BlueprintCallable)
+	void WaitFor();
 
 	virtual bool CommitAbility(
 		const FGameplayAbilitySpecHandle Handle,
@@ -38,7 +45,19 @@ private:
 		meta = (AllowPrivateAccess = "true"))
 	FGameplayTag WeaponEventTag;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gameplay Tags",
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gameplay Task",
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UAbilityTask_WaitGameplayEvent> GameplayEventWaitTask;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gameplay Tags",
+		meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UGameplayEffect> WeaponGameplayEffectClass;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gameplay Task",
+		meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UAbilityTask_WaitDelay> GameplayEventWaitDelayTask;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Gameplay Task",
+		meta = (AllowPrivateAccess = "true"))
+	float AbilityCooldown = 1.0f;*/
 };
