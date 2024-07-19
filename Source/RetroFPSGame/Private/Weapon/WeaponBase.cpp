@@ -5,6 +5,10 @@
 #include "Components/SceneCaptureComponent2D.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/PointLightComponent.h"
+#include "ActorSequenceComponent.h"
+#include "ActorSequence.h"
+#include "ActorSequencePlayer.h"
+
 // Sets default values
 AWeaponBase::AWeaponBase()
 {
@@ -27,6 +31,8 @@ AWeaponBase::AWeaponBase()
 	PointLight->SetIntensity(10000.f);
 	PointLight->SetAttenuationRadius(800.f);
 	PointLight->SetHiddenInGame(true);
+
+	WeaponBobAnim = CreateDefaultSubobject<UActorSequenceComponent>("Weapon Bob Animation");
 }
 
 void AWeaponBase::InitializeWeapon_Implementation()

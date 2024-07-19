@@ -14,4 +14,6 @@ class RETROFPSGAME_API UFPSAbilitySystemComponent : public UAbilitySystemCompone
 {
 	GENERATED_BODY()
 	
+public:
+	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
 };

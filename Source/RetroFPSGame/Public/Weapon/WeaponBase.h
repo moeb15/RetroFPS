@@ -10,6 +10,7 @@
 class USceneCaptureComponent2D;
 class UPaperFlipbookComponent;
 class UPointLightComponent;
+class UActorSequenceComponent;
 
 UCLASS()
 class RETROFPSGAME_API AWeaponBase : public AActor, public IIPlayerWeapon
@@ -24,6 +25,9 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void WeaponBob(bool IsMoving, float DeltaTime);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void WeaponDraw();
 
 protected:
 	// Called when the game starts or when spawned
@@ -40,6 +44,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera,
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UPointLightComponent> PointLight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations,
+		meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UActorSequenceComponent> WeaponBobAnim;
 
 public:	
 	// Called every frame

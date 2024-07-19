@@ -9,4 +9,5 @@ void APistol::InitializeWeapon_Implementation()
 {
 	WeaponFlipbook->SetFlipbook(Idle_Flipbook);
 	WeaponFlipbook->SetHiddenInGame(false);
+	WeaponDraw();
 }
