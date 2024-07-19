@@ -9,7 +9,7 @@
 #include "AbilitySystemInterface.h"
 #include "FPSCharacterBase.generated.h"
 
-class UAbilitySystemComponent;
+class UFPSAbilitySystemComponent;
 class UFPSAttributeSet;
 class UGameplayEffect;
 class UGameplayAbility;
@@ -32,7 +32,7 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities, 
 		meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+	TObjectPtr<UFPSAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
 	TObjectPtr<UFPSAttributeSet> Attributes;

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Player/FPSCharacterBase.h"
 #include "FPSCharacter.generated.h"
 
 
@@ -12,11 +13,12 @@ class UInputMappingContext;
 class UInputAction;
 class UPlayerHUD;
 class UChildActorComponent;
+class UInputConfig;
 class AWeaponBase;
 struct FInputActionValue;
 
 UCLASS()
-class RETROFPSGAME_API AFPSCharacter : public ACharacter
+class RETROFPSGAME_API AFPSCharacter : public AFPSCharacterBase
 {
 	GENERATED_BODY()
 
@@ -32,27 +34,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 	void EquipWeapon(TSubclassOf<AWeaponBase> WeaponClass);
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera,
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FirstPersonCamera;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input,
-		meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputMappingContext> DefaultMappingContext;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input,
-		meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputAction> MoveAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input,
-		meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputAction> LookAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = HUD,
 		meta = (AllowPrivateAccess = "true"))
@@ -66,12 +53,9 @@ private:
 		meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AWeaponBase> WeaponType;
 
+
 	UPROPERTY()
 	TObjectPtr<UPlayerHUD> PlayerHUD;
-
-protected:
-	void Move(const FInputActionValue& Value);
-	void Look(const FInputActionValue& Value);
 
 public:
 	FORCEINLINE UCameraComponent* GetCameraComponent() const { return FirstPersonCamera; }

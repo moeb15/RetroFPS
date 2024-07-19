@@ -3,6 +3,7 @@
 
 #include "Player/FPSCharacterBase.h"
 #include "AbilitySystem/FPSAttributeSet.h"
+#include "AbilitySystem/FPSAbilitySystemComponent.h"
 
 // Sets default values
 AFPSCharacterBase::AFPSCharacterBase()
@@ -10,7 +11,7 @@ AFPSCharacterBase::AFPSCharacterBase()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComp");
+	AbilitySystemComponent = CreateDefaultSubobject<UFPSAbilitySystemComponent>("AbilitySystemComp");
 	Attributes = CreateDefaultSubobject<UFPSAttributeSet>("Attributes");
 }
 
@@ -41,9 +42,7 @@ void AFPSCharacterBase::BeginPlay()
 		}
 
 		if (HasAuthority()) {
-			for (TSubclassOf<UGameplayAbility>& StartupAbility : DefaultAbilities) {
-				AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(StartupAbility.GetDefaultObject(), 1, 0));
-			}
+			AbilitySystemComponent->AddCharacterAbilities(DefaultAbilities);
 		}
 	}
 }

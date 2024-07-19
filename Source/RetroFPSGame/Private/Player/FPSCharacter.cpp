@@ -5,13 +5,10 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/ChildActorComponent.h"
-#include "EnhancedInputComponent.h"
-#include "EnhancedInputSubsystems.h"
-#include "InputActionValue.h"
-#include "InputAction.h"
 #include "HUD/PlayerHUD.h"
 #include "Weapon/WeaponBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/FPSController.h"
 
 // Sets default values
 AFPSCharacter::AFPSCharacter()
@@ -59,27 +56,6 @@ void AFPSCharacter::Tick(float DeltaTime)
 	Weapon->WeaponBob(isMoving, DeltaTime);
 }
 
-// Called to bind functionality to input
-void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	check(PlayerInputComponent);
-
-	if (APlayerController* PC = Cast<APlayerController>(GetController())) {
-		if (UEnhancedInputLocalPlayerSubsystem* ELS = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer())) {
-			ELS->AddMappingContext(DefaultMappingContext, 0);
-		}
-	}
-
-	if (UEnhancedInputComponent* EIC = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
-		// Moving
-		EIC->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFPSCharacter::Move);
-		
-		// Looking
-		EIC->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFPSCharacter::Look);
-	}
-}
-
 void AFPSCharacter::EquipWeapon(TSubclassOf<AWeaponBase> WeaponClass)
 {
 	WeaponType = WeaponClass;
@@ -89,28 +65,4 @@ void AFPSCharacter::EquipWeapon(TSubclassOf<AWeaponBase> WeaponClass)
 	}
 }
 
-void AFPSCharacter::Move(const FInputActionValue& Value)
-{
-	const FVector2D InputValue = Value.Get<FVector2D>();
-	
-	if (Controller != nullptr && (InputValue.X != 0.0f || InputValue.Y != 0.0f)) {
-		const FRotator Rot = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rot.Yaw, 0);
-		const FVector Forward = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		const FVector Right = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-		AddMovementInput(Forward, InputValue.Y);
-		AddMovementInput(Right, InputValue.X);
-	}
-}
-
-void AFPSCharacter::Look(const FInputActionValue& Value)
-{
-	const FVector2D InputValue = Value.Get<FVector2D>();
-
-	if (Controller != nullptr) {
-		AddControllerYawInput(InputValue.X);
-		AddControllerPitchInput(InputValue.Y);
-	}
-}
 
