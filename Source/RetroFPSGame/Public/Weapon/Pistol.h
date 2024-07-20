@@ -18,6 +18,7 @@ class RETROFPSGAME_API APistol : public AWeaponBase
 	
 public:
 	virtual void InitializeWeapon_Implementation() override;
+	virtual void SwapFlipbook_Implementation() override;
 
 private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon Animations",
