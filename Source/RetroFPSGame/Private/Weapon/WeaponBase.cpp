@@ -41,6 +41,10 @@ void AWeaponBase::InitializeWeapon_Implementation()
 	WeaponFlipbook->SetHiddenInGame(true);
 }
 
+void AWeaponBase::SwapFlipbook_Implementation()
+{
+}
+
 // Called when the game starts or when spawned
 void AWeaponBase::BeginPlay()
 {

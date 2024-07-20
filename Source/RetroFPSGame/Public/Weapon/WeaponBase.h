@@ -22,6 +22,7 @@ public:
 	AWeaponBase();
 
 	virtual void InitializeWeapon_Implementation() override;
+	virtual void SwapFlipbook_Implementation() override;
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void WeaponBob(bool IsMoving, float DeltaTime);
