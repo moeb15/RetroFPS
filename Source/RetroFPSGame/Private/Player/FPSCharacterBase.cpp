@@ -47,3 +47,7 @@ void AFPSCharacterBase::BeginPlay()
 	}
 }
 
+void AFPSCharacterBase::FireWeapon_Implementation()
+{
+}
+

@@ -30,6 +30,28 @@ AFPSCharacter::AFPSCharacter()
 
 }
 
+void AFPSCharacter::FireWeapon_Implementation()
+{
+	if (WeaponType->ImplementsInterface(UIPlayerWeapon::StaticClass())) {
+		IIPlayerWeapon::Execute_SwapFlipbook(WeaponActor->GetChildActor());
+
+		const FVector StartLoc = FirstPersonCamera->GetComponentLocation();
+		const FVector EndLoc = StartLoc + FirstPersonCamera->GetForwardVector() * 50000.f;
+
+		FHitResult BulletHitResult;
+		FCollisionQueryParams CollisionParams;
+		CollisionParams.AddIgnoredActor(this);
+		GetWorld()->LineTraceSingleByChannel(
+			BulletHitResult,
+			StartLoc,
+			EndLoc,
+			ECC_Visibility,
+			CollisionParams);
+
+		DrawDebugLine(GetWorld(), StartLoc, EndLoc, FColor::Blue, false, 3.f);
+	}
+}
+
 // Called when the game starts or when spawned
 void AFPSCharacter::BeginPlay()
 {

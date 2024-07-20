@@ -7,6 +7,7 @@
 #include "GameplayTagContainer.h"
 #include "GameplayEffectTypes.h"
 #include "AbilitySystemInterface.h"
+#include "Interfaces/CombatInterface.h"
 #include "FPSCharacterBase.generated.h"
 
 class UFPSAbilitySystemComponent;
@@ -15,7 +16,8 @@ class UGameplayEffect;
 class UGameplayAbility;
 
 UCLASS()
-class RETROFPSGAME_API AFPSCharacterBase : public ACharacter, public IAbilitySystemInterface
+class RETROFPSGAME_API AFPSCharacterBase : public ACharacter, public IAbilitySystemInterface,
+	public ICombatInterface
 {
 	GENERATED_BODY()
 
@@ -28,6 +30,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void FireWeapon_Implementation() override;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities, 
