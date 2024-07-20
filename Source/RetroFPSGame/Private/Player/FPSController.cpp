@@ -17,7 +17,8 @@ AFPSController::AFPSController()
 
 UFPSAbilitySystemComponent* AFPSController::GetASC()
 {
-	return Cast<UFPSAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(this));
+	if(ASC == nullptr) ASC = Cast<UFPSAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn()));
+	return ASC;
 }
 
 void AFPSController::BeginPlay()

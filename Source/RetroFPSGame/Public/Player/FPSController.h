@@ -45,6 +45,8 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UInputConfig> InputConfig;
 
+	UPROPERTY()
+	TObjectPtr<UFPSAbilitySystemComponent> ASC;
 
 protected:
 	void Move(const FInputActionValue& Value);
