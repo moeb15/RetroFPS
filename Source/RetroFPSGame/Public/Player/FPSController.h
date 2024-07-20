@@ -11,6 +11,7 @@
 class UInputAction;
 class UInputMappingContext;
 class UInputConfig;
+class UFPSAbilitySystemComponent;
 
 /**
  * 
@@ -22,6 +23,7 @@ class RETROFPSGAME_API AFPSController : public APlayerController
 	
 public:
 	AFPSController();
+	UFPSAbilitySystemComponent* GetASC();
 
 protected:
 	virtual void BeginPlay() override;

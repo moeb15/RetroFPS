@@ -7,10 +7,17 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "AbilitySystem/Input/InputConfig.h"
 #include "Input/FPSInputComponent.h"
+#include "AbilitySystem/FPSAbilitySystemComponent.h"
+#include "AbilitySystemBlueprintLibrary.h"
 
 AFPSController::AFPSController()
 {
 	PrimaryActorTick.bCanEverTick = true;
+}
+
+UFPSAbilitySystemComponent* AFPSController::GetASC()
+{
+	return Cast<UFPSAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(this));
 }
 
 void AFPSController::BeginPlay()
@@ -74,15 +81,15 @@ void AFPSController::Look(const FInputActionValue& Value)
 
 void AFPSController::AbilityHeldAction(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString::Printf(TEXT("%s"), *InputTag.ToString()));
+	if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);
 }
 
 void AFPSController::AbilityPressedAction(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Green, FString::Printf(TEXT("%s"), *InputTag.ToString()));
+
 }
 
 void AFPSController::AbilityReleasedAction(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(3, 5.f, FColor::Blue, FString::Printf(TEXT("%s"), *InputTag.ToString()));
+	if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
 }
