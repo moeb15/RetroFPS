@@ -6,6 +6,7 @@
 #include "UObject/Interface.h"
 #include "IPlayerWeapon.generated.h"
 
+
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
 class UIPlayerWeapon : public UInterface
@@ -25,4 +26,8 @@ public:
 	UFUNCTION(BlueprintNativeEvent)
 	void InitializeWeapon();
 	virtual void InitializeWeapon_Implementation() = 0;
+
+	UFUNCTION(BlueprintNativeEvent)
+	void SwapFlipbook();
+	virtual void SwapFlipbook_Implementation() = 0;
 };
