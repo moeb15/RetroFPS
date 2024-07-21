@@ -17,8 +17,13 @@ class RETROFPSGAME_API APistol : public AWeaponBase
 	GENERATED_BODY()
 	
 public:
+	APistol();
+
 	virtual void InitializeWeapon_Implementation() override;
 	virtual void SwapFlipbook_Implementation() override;
+
+	UFUNCTION()
+	void StopFiring();
 
 private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon Animations",

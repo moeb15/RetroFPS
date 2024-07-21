@@ -3,7 +3,13 @@
 
 #include "Weapon/Pistol.h"
 #include "PaperFlipbook.h"
+#include "Components/PointLightComponent.h"
 #include "PaperFlipbookComponent.h"
+
+APistol::APistol()
+{
+	WeaponFlipbook->OnFinishedPlaying.AddDynamic(this, &APistol::StopFiring);
+}
 
 void APistol::InitializeWeapon_Implementation()
 {
@@ -16,4 +22,10 @@ void APistol::SwapFlipbook_Implementation()
 {
 	WeaponFlipbook->SetFlipbook(Fire_Flipbook);
 	WeaponFlipbook->SetHiddenInGame(false);
+	WeaponFlipbook->Play();
+}
+
+void APistol::StopFiring() {
+	GetLight()->SetHiddenInGame(true);
+	WeaponFlipbook->SetFlipbook(Idle_Flipbook);
 }
