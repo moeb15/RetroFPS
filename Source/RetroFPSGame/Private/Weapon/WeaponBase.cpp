@@ -25,6 +25,7 @@ AWeaponBase::AWeaponBase()
 	WeaponFlipbook->SetRelativeLocation(FVector(0, 100, -50));
 	WeaponFlipbook->SetRelativeRotation(FRotator(0, 0, 90));
 	WeaponFlipbook->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	WeaponFlipbook->SetLooping(false);
 
 	PointLight = CreateDefaultSubobject<UPointLightComponent>("Point Light");
 	PointLight->SetupAttachment(Camera);

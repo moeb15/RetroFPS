@@ -54,4 +54,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	FORCEINLINE UPointLightComponent* GetLight() const { return PointLight; }
+
 };
