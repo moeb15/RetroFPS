@@ -26,7 +26,7 @@ public:
 	// Sets default values for this character's properties
 	AFPSCharacter();
 
-	virtual void FireWeapon_Implementation() override;
+	virtual FHitResult FireWeapon_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned

@@ -9,6 +9,7 @@
 #include "Weapon/WeaponBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/FPSController.h"
+#include "Components/PointLightComponent.h"
 
 // Sets default values
 AFPSCharacter::AFPSCharacter()
@@ -30,11 +31,12 @@ AFPSCharacter::AFPSCharacter()
 
 }
 
-void AFPSCharacter::FireWeapon_Implementation()
+FHitResult AFPSCharacter::FireWeapon_Implementation()
 {
 	if (WeaponType->ImplementsInterface(UIPlayerWeapon::StaticClass())) {
 		IIPlayerWeapon::Execute_SwapFlipbook(WeaponActor->GetChildActor());
-
+		AWeaponBase* CurWeapon = Cast<AWeaponBase>(WeaponActor->GetChildActor());
+		CurWeapon->GetLight()->SetHiddenInGame(false);
 		const FVector StartLoc = FirstPersonCamera->GetComponentLocation();
 		const FVector EndLoc = StartLoc + FirstPersonCamera->GetForwardVector() * 50000.f;
 
@@ -48,8 +50,10 @@ void AFPSCharacter::FireWeapon_Implementation()
 			ECC_Visibility,
 			CollisionParams);
 
-		DrawDebugLine(GetWorld(), StartLoc, EndLoc, FColor::Blue, false, 3.f);
+		//DrawDebugLine(GetWorld(), StartLoc, EndLoc, FColor::Blue, false, 3.f);
+		return BulletHitResult;
 	}
+	return FHitResult();
 }
 
 // Called when the game starts or when spawned
