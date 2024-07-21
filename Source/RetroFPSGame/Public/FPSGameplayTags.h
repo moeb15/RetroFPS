@@ -18,6 +18,10 @@ struct FRetroFPSGameplayTags
 	FGameplayTag Input_RMB;
 	FGameplayTag Input_R;
 
+	FGameplayTag Attributes_Primary_Health;
+	FGameplayTag Attributes_Primary_Armour;
+	FGameplayTag Attributes_Primary_Mana;
+
 private:
 	static FRetroFPSGameplayTags GameplayTags;
 };
