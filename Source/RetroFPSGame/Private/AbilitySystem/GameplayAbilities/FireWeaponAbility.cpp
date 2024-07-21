@@ -12,7 +12,10 @@ void UFireWeaponAbility::ActivateAbility(
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
-	if (ICombatInterface* CombatInterface = Cast<ICombatInterface>(GetAvatarActorFromActorInfo())) {
-		CombatInterface->FireWeapon_Implementation();
-	}
+}
+
+FHitResult UFireWeaponAbility::GetWeaponHitResult()
+{
+	ICombatInterface* CombatInterface = CastChecked<ICombatInterface>(GetAvatarActorFromActorInfo());
+	return CombatInterface->FireWeapon_Implementation();
 }

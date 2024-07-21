@@ -20,4 +20,7 @@ public:
 		const FGameplayAbilityActorInfo* ActorInfo, 
 		const FGameplayAbilityActivationInfo ActivationInfo, 
 		const FGameplayEventData* TriggerEventData) override;
+
+	UFUNCTION(BlueprintCallable, Category = Weapon)
+	FHitResult GetWeaponHitResult();
 };
