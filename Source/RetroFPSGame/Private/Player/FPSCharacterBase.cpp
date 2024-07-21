@@ -47,7 +47,8 @@ void AFPSCharacterBase::BeginPlay()
 	}
 }
 
-void AFPSCharacterBase::FireWeapon_Implementation()
+FHitResult AFPSCharacterBase::FireWeapon_Implementation()
 {
+	return FHitResult();
 }
 
