@@ -32,4 +32,8 @@ public:
 	FGameplayAttributeData Armour;
 	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, Armour);
 
+	UPROPERTY(BlueprintReadOnly, Category = Attributes)
+	FGameplayAttributeData Mana;
+	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, Mana);
+
 };
