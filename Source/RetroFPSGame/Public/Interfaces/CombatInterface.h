@@ -23,6 +23,8 @@ class RETROFPSGAME_API ICombatInterface
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void FireWeapon();
-	virtual void FireWeapon_Implementation() = 0;
+	FHitResult FireWeapon();
+	virtual FHitResult FireWeapon_Implementation() = 0;
+
+
 };
