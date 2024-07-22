@@ -6,6 +6,7 @@
 #include "AbilitySystemComponent.h"
 #include "DrawDebugHelpers.h"
 #include "AbilitySystemBlueprintLibrary.h"
+#include "NiagaraFunctionLibrary.h"
 
 void UFireWeaponAbility::ActivateAbility(
 	const FGameplayAbilitySpecHandle Handle,
@@ -25,9 +26,11 @@ FHitResult UFireWeaponAbility::GetWeaponHitResult()
 		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(WeaponHitResult.GetActor())) {
 			FGameplayEffectSpecHandle DamageEffectSpec = TargetASC->MakeOutgoingSpec(DamageEffectClass, 1.f, TargetASC->MakeEffectContext());
 			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpec.Data.Get());
-			DrawDebugSphere(GetWorld(), WeaponHitResult.ImpactPoint, 10, 10, FColor::Red, false, 3.0f);
+
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, BloodSplatterParticles, WeaponHitResult.ImpactPoint);
+			//DrawDebugSphere(GetWorld(), WeaponHitResult.ImpactPoint, 10, 10, FColor::Red, false, 3.0f);
 		}
-		DrawDebugSphere(GetWorld(), WeaponHitResult.ImpactPoint, 10, 10, FColor::Blue, false, 3.0f);
+		//DrawDebugSphere(GetWorld(), WeaponHitResult.ImpactPoint, 10, 10, FColor::Blue, false, 3.0f);
 	}
 
 	return WeaponHitResult;

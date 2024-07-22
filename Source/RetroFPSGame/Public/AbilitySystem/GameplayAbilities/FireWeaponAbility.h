@@ -6,6 +6,7 @@
 #include "AbilitySystem/GA_FPSAbility.h" 
 #include "FireWeaponAbility.generated.h"
 
+class UNiagaraSystem;
 /**
  * 
  */
@@ -26,4 +27,7 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage Effect");
 	TSubclassOf<UGameplayEffect> DamageEffectClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage Effect");
+	TObjectPtr<UNiagaraSystem> BloodSplatterParticles;
 };
