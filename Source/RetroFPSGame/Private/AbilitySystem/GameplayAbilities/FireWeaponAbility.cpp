@@ -3,6 +3,9 @@
 
 #include "AbilitySystem/GameplayAbilities/FireWeaponAbility.h"
 #include "Interfaces/CombatInterface.h"
+#include "AbilitySystemComponent.h"
+#include "DrawDebugHelpers.h"
+#include "AbilitySystemBlueprintLibrary.h"
 
 void UFireWeaponAbility::ActivateAbility(
 	const FGameplayAbilitySpecHandle Handle,
@@ -17,5 +20,15 @@ void UFireWeaponAbility::ActivateAbility(
 FHitResult UFireWeaponAbility::GetWeaponHitResult()
 {
 	ICombatInterface* CombatInterface = CastChecked<ICombatInterface>(GetAvatarActorFromActorInfo());
-	return CombatInterface->FireWeapon_Implementation();
+	FHitResult WeaponHitResult = CombatInterface->FireWeapon_Implementation();
+	if (WeaponHitResult.bBlockingHit) {
+		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(WeaponHitResult.GetActor())) {
+			FGameplayEffectSpecHandle DamageEffectSpec = TargetASC->MakeOutgoingSpec(DamageEffectClass, 1.f, TargetASC->MakeEffectContext());
+			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpec.Data.Get());
+			DrawDebugSphere(GetWorld(), WeaponHitResult.ImpactPoint, 10, 10, FColor::Red, false, 3.0f);
+		}
+		DrawDebugSphere(GetWorld(), WeaponHitResult.ImpactPoint, 10, 10, FColor::Blue, false, 3.0f);
+	}
+
+	return WeaponHitResult;
 }

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/GA_FPSAbility.h"
+#include "AbilitySystem/GA_FPSAbility.h" 
 #include "FireWeaponAbility.generated.h"
 
 /**
@@ -23,4 +23,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	FHitResult GetWeaponHitResult();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage Effect");
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
 };
