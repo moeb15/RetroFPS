@@ -36,22 +36,24 @@ FHitResult AFPSCharacter::FireWeapon_Implementation()
 	if (WeaponType->ImplementsInterface(UIPlayerWeapon::StaticClass())) {
 		IIPlayerWeapon::Execute_SwapFlipbook(WeaponActor->GetChildActor());
 		AWeaponBase* CurWeapon = Cast<AWeaponBase>(WeaponActor->GetChildActor());
-		CurWeapon->GetLight()->SetHiddenInGame(false);
-		const FVector StartLoc = FirstPersonCamera->GetComponentLocation();
-		const FVector EndLoc = StartLoc + FirstPersonCamera->GetForwardVector() * 50000.f;
+		if (CurWeapon->CanFire()) {
+			CurWeapon->GetLight()->SetHiddenInGame(false);
+			const FVector StartLoc = FirstPersonCamera->GetComponentLocation();
+			const FVector EndLoc = StartLoc + FirstPersonCamera->GetForwardVector() * 50000.f;
 
-		FHitResult BulletHitResult;
-		FCollisionQueryParams CollisionParams;
-		CollisionParams.AddIgnoredActor(this);
-		GetWorld()->LineTraceSingleByChannel(
-			BulletHitResult,
-			StartLoc,
-			EndLoc,
-			ECC_Visibility,
-			CollisionParams);
+			FHitResult BulletHitResult;
+			FCollisionQueryParams CollisionParams;
+			CollisionParams.AddIgnoredActor(this);
+			GetWorld()->LineTraceSingleByChannel(
+				BulletHitResult,
+				StartLoc,
+				EndLoc,
+				ECC_Visibility,
+				CollisionParams);
 
-		//DrawDebugLine(GetWorld(), StartLoc, EndLoc, FColor::Blue, false, 3.f);
-		return BulletHitResult;
+			//DrawDebugLine(GetWorld(), StartLoc, EndLoc, FColor::Blue, false, 3.f);
+			return BulletHitResult;
+		}
 	}
 	return FHitResult();
 }
