@@ -30,6 +30,8 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void WeaponDraw();
 
+	void SetCanFire(bool flag);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -50,10 +52,14 @@ protected:
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UActorSequenceComponent> WeaponBobAnim;
 
+	bool bCanFire = false;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	FORCEINLINE UPointLightComponent* GetLight() const { return PointLight; }
+
+	FORCEINLINE bool CanFire() const { return bCanFire; }
 
 };

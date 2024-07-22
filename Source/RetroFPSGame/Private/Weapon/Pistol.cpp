@@ -9,6 +9,7 @@
 APistol::APistol()
 {
 	WeaponFlipbook->OnFinishedPlaying.AddDynamic(this, &APistol::StopFiring);
+	SetCanFire(true);
 }
 
 void APistol::InitializeWeapon_Implementation()

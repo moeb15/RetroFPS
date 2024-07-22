@@ -46,6 +46,11 @@ void AWeaponBase::SwapFlipbook_Implementation()
 {
 }
 
+void AWeaponBase::SetCanFire(bool flag)
+{
+	bCanFire = flag;
+}
+
 // Called when the game starts or when spawned
 void AWeaponBase::BeginPlay()
 {
