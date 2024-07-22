@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GameplayTagContainer.h"
 #include "GameplayEffectTypes.h"
+#include "AbilitySystem/FPSAttributeSet.h"
 #include "AbilitySystemInterface.h"
 #include "Interfaces/CombatInterface.h"
 #include "FPSCharacterBase.generated.h"
@@ -26,6 +27,8 @@ public:
 	AFPSCharacterBase();
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+	UFPSAttributeSet* GetAttributeSet() const;
 
 protected:
 	// Called when the game starts or when spawned

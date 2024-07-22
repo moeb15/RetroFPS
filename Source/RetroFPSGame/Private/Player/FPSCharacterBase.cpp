@@ -20,6 +20,11 @@ UAbilitySystemComponent* AFPSCharacterBase::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+UFPSAttributeSet* AFPSCharacterBase::GetAttributeSet() const
+{
+	return Attributes;
+}
+
 // Called when the game starts or when spawned
 void AFPSCharacterBase::BeginPlay()
 {
