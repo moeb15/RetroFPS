@@ -23,7 +23,8 @@ public class RetroFPSGame : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[] {
             "GameplayTags",
             "GameplayTasks",
-			"Niagara"
+			"Niagara",
+			"AIModule"
         });
 
 		// Uncomment if you are using Slate UI
