@@ -8,7 +8,7 @@
 
 class UPaperFlipbookComponent;
 class UPaperFlipbook;
-
+class AFPSAIController;
 /**
  * 
  */
@@ -20,6 +20,10 @@ class RETROFPSGAME_API AEnemyCharacter : public AFPSCharacterBase
 public:
 	AEnemyCharacter();
 	virtual void Tick(float DeltaTime) override;
+	virtual FHitResult FireWeapon_Implementation() override;
+
+protected:
+	virtual void PossessedBy(AController* NewController) override;
 
 private:
 	void OrientTowardsPlayer();
@@ -35,6 +39,16 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Enemy,
 		meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UPaperFlipbook> EnenyDefaultFlipbook;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Enemy,
+		meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UPaperFlipbook> EnemyFireWeapon;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Enemy,
+		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UPaperFlipbook> EnemyDeath;
 
+	UPROPERTY()
+	TObjectPtr<AFPSAIController> FPSAIController;
 };

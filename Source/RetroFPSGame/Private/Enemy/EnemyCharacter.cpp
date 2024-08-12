@@ -6,7 +6,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "Player/FPSCharacter.h"
 #include "PaperFlipbook.h"
+#include "AI/FPSAIController.h"
 
 AEnemyCharacter::AEnemyCharacter()
 {
@@ -14,6 +16,9 @@ AEnemyCharacter::AEnemyCharacter()
 	Enemy->SetupAttachment(GetRootComponent());
 	
 	Enemy->OnFinishedPlaying.AddDynamic(this, &AEnemyCharacter::KillEnemy);
+
+	Enemy->SetFlipbook(EnenyDefaultFlipbook);
+	Enemy->SetLooping(true);
 }
 
 void AEnemyCharacter::Tick(float DeltaTime)
@@ -22,6 +27,40 @@ void AEnemyCharacter::Tick(float DeltaTime)
 
 	OrientTowardsPlayer();
 	Death();
+}
+
+FHitResult AEnemyCharacter::FireWeapon_Implementation()
+{
+	Enemy->SetFlipbook(EnemyFireWeapon);
+	Enemy->SetLooping(false);
+
+	const APlayerCameraManager* CameraManager = UGameplayStatics::GetPlayerCameraManager(this, 0);
+	const FVector StartPos = GetActorLocation();
+	const FVector PlayerCameraloc = CameraManager->GetCameraLocation();
+
+	FHitResult HitRes;
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+	GetWorld()->LineTraceSingleByChannel(
+		HitRes,
+		StartPos,
+		PlayerCameraloc,
+		ECC_Visibility,
+		CollisionParams
+	);
+
+	if (HitRes.bBlockingHit) {
+		if (Cast<AFPSCharacter>(HitRes.GetActor())) {
+			return HitRes;
+		}
+	}
+
+	return FHitResult();
+}
+
+void AEnemyCharacter::PossessedBy(AController* NewController)
+{
+	FPSAIController = Cast<AFPSAIController>(NewController);
 }
 
 void AEnemyCharacter::OrientTowardsPlayer()
@@ -45,5 +84,13 @@ void AEnemyCharacter::Death()
 
 void AEnemyCharacter::KillEnemy()
 {
-	Destroy();
+	if (Enemy->GetFlipbook() == EnemyDeath)
+	{
+		Destroy();
+	}
+	else
+	{
+		Enemy->SetFlipbook(EnenyDefaultFlipbook);
+		Enemy->SetLooping(true);
+	}
 }
