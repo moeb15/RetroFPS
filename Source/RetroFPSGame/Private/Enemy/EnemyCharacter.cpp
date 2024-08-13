@@ -9,6 +9,8 @@
 #include "Player/FPSCharacter.h"
 #include "PaperFlipbook.h"
 #include "AI/FPSAIController.h"
+#include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BlackboardComponent.h"
 
 AEnemyCharacter::AEnemyCharacter()
 {
@@ -61,6 +63,9 @@ FHitResult AEnemyCharacter::FireWeapon_Implementation()
 void AEnemyCharacter::PossessedBy(AController* NewController)
 {
 	FPSAIController = Cast<AFPSAIController>(NewController);
+
+	FPSAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviourTree->BlackboardAsset);
+	FPSAIController->RunBehaviorTree(BehaviourTree);
 }
 
 void AEnemyCharacter::OrientTowardsPlayer()

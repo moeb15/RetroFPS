@@ -9,6 +9,7 @@
 class UPaperFlipbookComponent;
 class UPaperFlipbook;
 class AFPSAIController;
+class UBehaviorTree;
 /**
  * 
  */
@@ -48,6 +49,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Enemy,
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UPaperFlipbook> EnemyDeath;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI",
+		meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UBehaviorTree> BehaviourTree;
 
 	UPROPERTY()
 	TObjectPtr<AFPSAIController> FPSAIController;
