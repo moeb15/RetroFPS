@@ -11,6 +11,7 @@
 #include "AI/FPSAIController.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 AEnemyCharacter::AEnemyCharacter()
 {
@@ -21,6 +22,8 @@ AEnemyCharacter::AEnemyCharacter()
 
 	Enemy->SetFlipbook(EnenyDefaultFlipbook);
 	Enemy->SetLooping(true);
+
+	GetCharacterMovement()->MaxWalkSpeed = 100.f;
 }
 
 void AEnemyCharacter::Tick(float DeltaTime)
