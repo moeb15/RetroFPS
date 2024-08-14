@@ -40,9 +40,9 @@ FHitResult AEnemyCharacter::FireWeapon_Implementation()
 	Enemy->SetLooping(false);
 	Enemy->Play();
 
-	const APlayerCameraManager* CameraManager = UGameplayStatics::GetPlayerCameraManager(this, 0);
+	//const APlayerCameraManager* CameraManager = UGameplayStatics::GetPlayerCameraManager(this, 0);
 	const FVector StartPos = GetActorLocation();
-	const FVector PlayerCameraloc = CameraManager->GetCameraLocation();
+	const FVector EndPos = StartPos + GetActorRightVector() * 4000.f;
 
 	FHitResult HitRes;
 	FCollisionQueryParams CollisionParams;
@@ -50,18 +50,12 @@ FHitResult AEnemyCharacter::FireWeapon_Implementation()
 	GetWorld()->LineTraceSingleByChannel(
 		HitRes,
 		StartPos,
-		PlayerCameraloc,
+		EndPos,
 		ECC_Visibility,
 		CollisionParams
 	);
 
-	if (HitRes.bBlockingHit) {
-		if (Cast<AFPSCharacter>(HitRes.GetActor())) {
-			return HitRes;
-		}
-	}
-
-	return FHitResult();
+	return HitRes;
 }
 
 void AEnemyCharacter::PossessedBy(AController* NewController)
