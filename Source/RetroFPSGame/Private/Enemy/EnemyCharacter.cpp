@@ -58,10 +58,13 @@ FHitResult AEnemyCharacter::FireWeapon_Implementation()
 	return HitRes;
 }
 
-void AEnemyCharacter::PossessedBy(AController* NewController)
+void AEnemyCharacter::BeginPlay()
 {
-	FPSAIController = Cast<AFPSAIController>(NewController);
+	Super::BeginPlay();
 
+	FPSAIController = Cast<AFPSAIController>(Controller);
+
+	//FPSAIController->Possess(this);
 	FPSAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviourTree->BlackboardAsset);
 	FPSAIController->RunBehaviorTree(BehaviourTree);
 }

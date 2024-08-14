@@ -24,7 +24,7 @@ public:
 	virtual FHitResult FireWeapon_Implementation() override;
 
 protected:
-	virtual void PossessedBy(AController* NewController) override;
+	virtual void BeginPlay() override;
 
 private:
 	void OrientTowardsPlayer();
