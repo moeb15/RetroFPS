@@ -21,7 +21,7 @@ AEnemyCharacter::AEnemyCharacter()
 	Enemy->OnFinishedPlaying.AddDynamic(this, &AEnemyCharacter::KillEnemy);
 
 	Enemy->SetFlipbook(EnenyDefaultFlipbook);
-	Enemy->SetLooping(true);
+	//Enemy->SetLooping(true);
 
 	GetCharacterMovement()->MaxWalkSpeed = 100.f;
 }
@@ -38,6 +38,7 @@ FHitResult AEnemyCharacter::FireWeapon_Implementation()
 {
 	Enemy->SetFlipbook(EnemyFireWeapon);
 	Enemy->SetLooping(false);
+	Enemy->Play();
 
 	const APlayerCameraManager* CameraManager = UGameplayStatics::GetPlayerCameraManager(this, 0);
 	const FVector StartPos = GetActorLocation();
@@ -100,5 +101,6 @@ void AEnemyCharacter::KillEnemy()
 	{
 		Enemy->SetFlipbook(EnenyDefaultFlipbook);
 		Enemy->SetLooping(true);
+		Enemy->Play();
 	}
 }
