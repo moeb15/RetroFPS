@@ -24,6 +24,8 @@ class RETROFPSGAME_API UFPSAttributeSet : public UAttributeSet
 public:
 	UFPSAttributeSet();
 
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+
 	UPROPERTY(BlueprintReadOnly, Category = Attributes)
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, Health);
@@ -35,5 +37,17 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Attributes)
 	FGameplayAttributeData Mana;
 	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, Mana);
+
+	UPROPERTY(BlueprintReadOnly, Category = Attributes)
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, MaxHealth);
+
+	UPROPERTY(BlueprintReadOnly, Category = Attributes)
+	FGameplayAttributeData MaxArmour;
+	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, MaxArmour);
+
+	UPROPERTY(BlueprintReadOnly, Category = Attributes)
+	FGameplayAttributeData MaxMana;
+	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, MaxMana);
 
 };
