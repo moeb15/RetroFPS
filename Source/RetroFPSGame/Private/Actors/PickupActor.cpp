@@ -8,7 +8,7 @@
 
 APickupActor::APickupActor()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 }
 
