@@ -23,7 +23,7 @@ AEnemyCharacter::AEnemyCharacter()
 	Enemy->SetFlipbook(EnenyDefaultFlipbook);
 	//Enemy->SetLooping(true);
 
-	GetCharacterMovement()->MaxWalkSpeed = 100.f;
+	GetCharacterMovement()->MaxWalkSpeed = 300.f;
 }
 
 void AEnemyCharacter::Tick(float DeltaTime)
