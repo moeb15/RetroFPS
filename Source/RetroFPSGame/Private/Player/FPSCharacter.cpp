@@ -58,6 +58,17 @@ FHitResult AFPSCharacter::FireWeapon_Implementation()
 	return FHitResult();
 }
 
+FTransform AFPSCharacter::GetAlternateFireTransform_Implementation()
+{
+	return GetActorTransform();
+}
+
+bool AFPSCharacter::CanAlternateFire() const
+{
+	AWeaponBase* CurWeapon = Cast<AWeaponBase>(WeaponActor->GetChildActor());
+	return CurWeapon->CanFire();
+}
+
 // Called when the game starts or when spawned
 void AFPSCharacter::BeginPlay()
 {

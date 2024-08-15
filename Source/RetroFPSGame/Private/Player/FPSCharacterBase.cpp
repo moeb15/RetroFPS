@@ -57,3 +57,13 @@ FHitResult AFPSCharacterBase::FireWeapon_Implementation()
 	return FHitResult();
 }
 
+FTransform AFPSCharacterBase::GetAlternateFireTransform_Implementation()
+{
+	return FTransform();
+}
+
+bool AFPSCharacterBase::CanAlternateFire() const
+{
+	return false;
+}
+

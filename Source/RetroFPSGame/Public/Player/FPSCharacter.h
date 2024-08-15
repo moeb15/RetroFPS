@@ -27,6 +27,8 @@ public:
 	AFPSCharacter();
 
 	virtual FHitResult FireWeapon_Implementation() override;
+	virtual FTransform GetAlternateFireTransform_Implementation() override;
+	virtual bool CanAlternateFire() const override;
 
 protected:
 	// Called when the game starts or when spawned
