@@ -26,5 +26,10 @@ public:
 	FHitResult FireWeapon();
 	virtual FHitResult FireWeapon_Implementation() = 0;
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	FTransform GetAlternateFireTransform();
+	virtual FTransform GetAlternateFireTransform_Implementation() = 0;
+
+	virtual bool CanAlternateFire() const = 0;
 
 };
