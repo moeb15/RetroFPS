@@ -10,6 +10,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/FPSController.h"
 #include "Components/PointLightComponent.h"
+#include "HUD/FPSHUD.h"
 
 // Sets default values
 AFPSCharacter::AFPSCharacter()
@@ -60,7 +61,10 @@ FHitResult AFPSCharacter::FireWeapon_Implementation()
 
 FTransform AFPSCharacter::GetAlternateFireTransform_Implementation()
 {
-	return GetActorTransform();
+	FTransform AlternateFireTransform;
+	AlternateFireTransform.SetLocation(GetActorLocation() + ( GetActorUpVector() + GetActorForwardVector()) * 10);
+	AlternateFireTransform.SetRotation(GetActorQuat());
+	return AlternateFireTransform;
 }
 
 bool AFPSCharacter::CanAlternateFire() const
@@ -73,13 +77,12 @@ bool AFPSCharacter::CanAlternateFire() const
 void AFPSCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	if (PlayerHUDClass) {
-		APlayerController* PC = Cast<APlayerController>(GetController());
-		check(PC);
-		PlayerHUD = CreateWidget<UPlayerHUD>(PC, PlayerHUDClass);
-		check(PlayerHUD);
-		PlayerHUD->AddToPlayerScreen();
-	}
+	APlayerController* PC = Cast<APlayerController>(GetController());
+	check(PC);
+	AFPSHUD* HUD = Cast<AFPSHUD>(PC->GetHUD());
+	check(HUD);
+	HUD->InitHUD(GetAbilitySystemComponent(), GetAttributeSet());
+
 	if (WeaponType) {
 		EquipWeapon(WeaponType);
 	}

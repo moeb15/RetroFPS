@@ -45,10 +45,6 @@ private:
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FirstPersonCamera;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = HUD,
-		meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<UPlayerHUD> PlayerHUDClass;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Weapon,
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UChildActorComponent> WeaponActor;
