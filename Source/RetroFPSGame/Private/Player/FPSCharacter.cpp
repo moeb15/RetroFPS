@@ -5,7 +5,6 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/ChildActorComponent.h"
-#include "HUD/PlayerHUD.h"
 #include "Weapon/WeaponBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/FPSController.h"
@@ -30,6 +29,7 @@ AFPSCharacter::AFPSCharacter()
 	WeaponActor = CreateDefaultSubobject<UChildActorComponent>("Weapon Actor");
 	WeaponActor->SetupAttachment(FirstPersonCamera);
 
+	GetCharacterMovement()->MaxWalkSpeed = 800.f;
 }
 
 FHitResult AFPSCharacter::FireWeapon_Implementation()

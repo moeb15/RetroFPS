@@ -53,10 +53,6 @@ private:
 		meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AWeaponBase> WeaponType;
 
-
-	UPROPERTY()
-	TObjectPtr<UPlayerHUD> PlayerHUD;
-
 public:
 	FORCEINLINE UCameraComponent* GetCameraComponent() const { return FirstPersonCamera; }
 };
