@@ -22,6 +22,7 @@ public:
 	AEnemyCharacter();
 	virtual void Tick(float DeltaTime) override;
 	virtual FHitResult FireWeapon_Implementation() override;
+	virtual void Destroyed() override;
 
 protected:
 	virtual void BeginPlay() override;

@@ -12,6 +12,7 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Managers/EnemyManager.h"
 
 AEnemyCharacter::AEnemyCharacter()
 {
@@ -58,9 +59,17 @@ FHitResult AEnemyCharacter::FireWeapon_Implementation()
 	return HitRes;
 }
 
+void AEnemyCharacter::Destroyed()
+{
+	EnemyManager::EnemyDestroyed();
+	Super::Destroyed();
+}
+
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	EnemyManager::InitializeEnemy();
 
 	FPSAIController = Cast<AFPSAIController>(Controller);
 
