@@ -34,7 +34,7 @@ private:
 		meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UBoxComponent> CollisionBox;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Launch Pad",
+	UPROPERTY(EditAnywhere, Category = "Launch Pad",
 		meta = (AllowPrivateAccess = "true"))
 	float LaunchSpeed = 3000.f;;
 };

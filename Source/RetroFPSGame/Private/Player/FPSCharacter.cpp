@@ -30,6 +30,7 @@ AFPSCharacter::AFPSCharacter()
 	WeaponActor->SetupAttachment(FirstPersonCamera);
 
 	GetCharacterMovement()->MaxWalkSpeed = 800.f;
+	GetCharacterMovement()->AirControl = 0.9f;
 }
 
 FHitResult AFPSCharacter::FireWeapon_Implementation()

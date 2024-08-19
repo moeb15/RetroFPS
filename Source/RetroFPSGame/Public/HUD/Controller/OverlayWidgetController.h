@@ -13,7 +13,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature, float,
 /**
  * 
  */
-UCLASS(Blueprintable, BlueprintType)
+UCLASS(BlueprintType, Blueprintable)
 class RETROFPSGAME_API UOverlayWidgetController : public UObject
 {
 	GENERATED_BODY()
@@ -21,26 +21,24 @@ class RETROFPSGAME_API UOverlayWidgetController : public UObject
 public:
 	UFUNCTION(BlueprintCallable)
 	void BroadcastInitialValues();
-
-	UFUNCTION(BlueprintCallable)
 	void BindCallbacksToDependencies();
 
-	UPROPERTY(BlueprintAssignable, Category = "Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnAttributeChangedSignature OnHealthChanged;
 
-	UPROPERTY(BlueprintAssignable, Category = "Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnAttributeChangedSignature OnMaxHealthChanged;
 
-	UPROPERTY(BlueprintAssignable, Category = "Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnAttributeChangedSignature OnManaChanged;
 
-	UPROPERTY(BlueprintAssignable, Category = "Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnAttributeChangedSignature OnMaxManaChanged;
 
-	UPROPERTY(BlueprintAssignable, Category = "Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnAttributeChangedSignature OnArmourChanged;
 
-	UPROPERTY(BlueprintAssignable, Category = "Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnAttributeChangedSignature OnMaxArmourChanged;
 
 	UPROPERTY(VisibleAnywhere, Category = "Widget Controller")

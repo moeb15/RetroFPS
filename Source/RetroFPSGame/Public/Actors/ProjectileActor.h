@@ -36,7 +36,7 @@ protected:
 
 private:
 	UPROPERTY(EditDefaultsOnly)
-	float LifeSpan = 10.f;
+	float LifeSpan = 3.f;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USphereComponent> OverlapSphere;
