@@ -25,3 +25,8 @@ int EnemyManager::GetEnemyCount()
 {
 	return s_Instance.EnemyCount;
 }
+
+void EnemyManager::ResetEnemyCount()
+{
+	s_Instance.EnemyCount = 0;
+}

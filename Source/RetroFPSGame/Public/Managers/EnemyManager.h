@@ -16,6 +16,7 @@ public:
 	static void InitializeEnemy();
 	static void EnemyDestroyed();
 	static int GetEnemyCount();
+	static void ResetEnemyCount();
 
 	FOnEnemyDestroyedSignature OnEnemyDestroyed;
 
