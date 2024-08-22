@@ -10,6 +10,7 @@
 #include "Player/FPSController.h"
 #include "Components/PointLightComponent.h"
 #include "HUD/FPSHUD.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AFPSCharacter::AFPSCharacter()
@@ -87,6 +88,11 @@ void AFPSCharacter::BeginPlay()
 	if (WeaponType) {
 		EquipWeapon(WeaponType);
 	}
+}
+
+void AFPSCharacter::Die() const
+{
+	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()));
 }
 
 // Called every frame

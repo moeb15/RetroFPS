@@ -36,6 +36,7 @@ protected:
 	virtual FHitResult FireWeapon_Implementation() override;
 	virtual FTransform GetAlternateFireTransform_Implementation() override;
 	virtual bool CanAlternateFire() const override;
+	virtual void Die() const override;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities, 

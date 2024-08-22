@@ -67,3 +67,7 @@ bool AFPSCharacterBase::CanAlternateFire() const
 	return false;
 }
 
+void AFPSCharacterBase::Die() const
+{
+}
+
