@@ -13,6 +13,40 @@
  GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
  GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+
+USTRUCT()
+struct FEffectProperties
+{
+	GENERATED_BODY();
+	
+	FEffectProperties() {}
+
+	UPROPERTY()
+	UAbilitySystemComponent* SourceASC = nullptr;
+	
+	UPROPERTY()
+	AActor* SourceAvatarActor = nullptr;
+
+	UPROPERTY()
+	AController* SourceController = nullptr;
+
+	UPROPERTY()
+	ACharacter* SourceCharacter = nullptr;
+
+	UPROPERTY()
+	UAbilitySystemComponent* TargetASC = nullptr;
+
+	UPROPERTY()
+	AActor* TargetAvatarActor = nullptr;
+
+	UPROPERTY()
+	AController* TargetController = nullptr;
+
+	UPROPERTY()
+	ACharacter* TargetCharacter = nullptr;
+
+	FGameplayEffectContextHandle Handle;
+};
 /**
  * 
  */
@@ -25,6 +59,7 @@ public:
 	UFPSAttributeSet();
 
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+	void SetEffectProperties(const struct FGameplayEffectModCallbackData& Data, FEffectProperties& Props);
 
 	UPROPERTY(BlueprintReadOnly, Category = Attributes)
 	FGameplayAttributeData Health;
