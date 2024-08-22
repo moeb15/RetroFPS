@@ -32,4 +32,6 @@ public:
 
 	virtual bool CanAlternateFire() const = 0;
 
+	virtual void Die() const = 0;
+
 };
