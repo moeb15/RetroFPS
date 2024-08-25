@@ -85,4 +85,8 @@ public:
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, MaxMana);
 
+	UPROPERTY(BlueprintReadOnly, Category = Attributes)
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UFPSAttributeSet, IncomingDamage);
+
 };

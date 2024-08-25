@@ -19,19 +19,27 @@ void UFPSAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 
 	if (Data.EvaluatedData.Attribute == GetHealthAttribute()) {
 		SetHealth(FMath::Clamp(GetHealth(), 0.0f, GetMaxHealth()));
-		
-		bool bIsAlive = GetHealth() > 0.0f;
-		if(!bIsAlive)
-		{
-			ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor);
-			if(CombatInterface)
-			{
-				CombatInterface->Die();
-			}
-		}
 	}
 	if (Data.EvaluatedData.Attribute == GetManaAttribute()) {
 		SetMana(FMath::Clamp(GetMana(), 0.0f, GetMaxMana()));
+	}
+	if(Data.EvaluatedData.Attribute == GetIncomingDamageAttribute()){
+		const float LocalIncomingDamage = GetIncomingDamage();
+		SetIncomingDamage(0);
+		if(LocalIncomingDamage > 0.0f){
+			const float NewHealth = GetHealth() - LocalIncomingDamage;
+			SetHealth(FMath::Clamp(NewHealth, 0, GetMaxHealth()));
+
+		bool bIsAlive = GetHealth() > 0.0f;
+			if(!bIsAlive)
+			{
+				ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor);
+				if(CombatInterface)
+				{
+					CombatInterface->Die();
+				}
+			}
+		}
 	}
 }
 
