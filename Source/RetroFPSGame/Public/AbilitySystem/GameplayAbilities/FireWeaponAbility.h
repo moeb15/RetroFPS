@@ -29,5 +29,8 @@ public:
 	TSubclassOf<UGameplayEffect> DamageEffectClass;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage Effect");
+	float Damage;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage Effect");
 	TObjectPtr<UNiagaraSystem> BloodSplatterParticles;
 };

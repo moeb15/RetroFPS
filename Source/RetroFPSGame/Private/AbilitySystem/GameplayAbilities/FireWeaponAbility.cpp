@@ -7,6 +7,8 @@
 #include "DrawDebugHelpers.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "NiagaraFunctionLibrary.h"
+#include "FPSGameplayTags.h"
+#include "AbilitySystemBlueprintLibrary.h"
 
 void UFireWeaponAbility::ActivateAbility(
 	const FGameplayAbilitySpecHandle Handle,
@@ -25,6 +27,7 @@ FHitResult UFireWeaponAbility::GetWeaponHitResult()
 	if (WeaponHitResult.bBlockingHit) {
 		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(WeaponHitResult.GetActor())) {
 			FGameplayEffectSpecHandle DamageEffectSpec = TargetASC->MakeOutgoingSpec(DamageEffectClass, 1.f, TargetASC->MakeEffectContext());
+			UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(DamageEffectSpec, FRetroFPSGameplayTags::Get().Damage, Damage);
 			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpec.Data.Get());
 
 			UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, BloodSplatterParticles, WeaponHitResult.ImpactPoint);
