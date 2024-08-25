@@ -23,6 +23,9 @@ void UFPSAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	if (Data.EvaluatedData.Attribute == GetManaAttribute()) {
 		SetMana(FMath::Clamp(GetMana(), 0.0f, GetMaxMana()));
 	}
+	if (Data.EvaluatedData.Attribute == GetArmourAttribute()) {
+		SetArmour(FMath::Clamp(GetArmour(), 0.0f, GetMaxArmour()));
+	}
 	if(Data.EvaluatedData.Attribute == GetIncomingDamageAttribute()){
 		const float LocalIncomingDamage = GetIncomingDamage();
 		SetIncomingDamage(0);
