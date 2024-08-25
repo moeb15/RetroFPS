@@ -22,6 +22,8 @@ struct FRetroFPSGameplayTags
 	FGameplayTag Attributes_Primary_Armour;
 	FGameplayTag Attributes_Primary_Mana;
 
+	FGameplayTag Damage;
+
 private:
 	static FRetroFPSGameplayTags GameplayTags;
 };

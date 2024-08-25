@@ -14,4 +14,6 @@ void FRetroFPSGameplayTags::InitializeNativeGameplayTags() {
 	GameplayTags.Attributes_Primary_Health = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Primary.Health"), FString("Health attribute"));
 	GameplayTags.Attributes_Primary_Armour = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Primary.Armour"), FString("Armour attribute, increases damage reduction"));
 	GameplayTags.Attributes_Primary_Mana = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Primary.Mana"), FString("Mana"));
+
+	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Damage"));
 }
