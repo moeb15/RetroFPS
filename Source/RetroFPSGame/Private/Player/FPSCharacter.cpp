@@ -11,6 +11,7 @@
 #include "Components/PointLightComponent.h"
 #include "HUD/FPSHUD.h"
 #include "Kismet/GameplayStatics.h"
+#include "Managers/EnemyManager.h"
 
 // Sets default values
 AFPSCharacter::AFPSCharacter()
@@ -92,6 +93,7 @@ void AFPSCharacter::BeginPlay()
 
 void AFPSCharacter::Die() const
 {
+	EnemyManager::ResetEnemyCount();
 	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()));
 }
 
