@@ -36,6 +36,7 @@ void AEnemyCharacter::Tick(float DeltaTime)
 
 FHitResult AEnemyCharacter::FireWeapon_Implementation()
 {
+	if (FPSAIController->GetBlackboardComponent()->GetValueAsBool(FName("IsDying"))) return FHitResult();
 	Enemy->SetFlipbook(EnemyFireWeapon);
 	Enemy->SetLooping(false);
 	Enemy->Play();
@@ -69,6 +70,7 @@ void AEnemyCharacter::Die() const
 	FPSAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsDying"), true);
 	Enemy->SetFlipbook(EnemyDeath);
 	Enemy->SetLooping(false);
+	Enemy->Play();
 }
 
 void AEnemyCharacter::BeginPlay()
