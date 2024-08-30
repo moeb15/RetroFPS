@@ -92,6 +92,7 @@ void AEnemyCharacter::OrientTowardsPlayer()
 void AEnemyCharacter::Death()
 {
 	if (GetAttributeSet()->GetHealth() <= 0.f) {
+		FPSAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsDying"), true);
 		Enemy->SetFlipbook(EnemyDeath);
 		Enemy->SetLooping(false);
 	}
