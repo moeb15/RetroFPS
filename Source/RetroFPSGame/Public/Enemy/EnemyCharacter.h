@@ -23,13 +23,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual FHitResult FireWeapon_Implementation() override;
 	virtual void Destroyed() override;
+	virtual void Die() const override;
 
 protected:
 	virtual void BeginPlay() override;
 
 private:
 	void OrientTowardsPlayer();
-	void Death();
 
 	UFUNCTION()
 	void KillEnemy();

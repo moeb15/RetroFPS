@@ -32,7 +32,6 @@ void AEnemyCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	OrientTowardsPlayer();
-	Death();
 }
 
 FHitResult AEnemyCharacter::FireWeapon_Implementation()
@@ -65,6 +64,13 @@ void AEnemyCharacter::Destroyed()
 	Super::Destroyed();
 }
 
+void AEnemyCharacter::Die() const
+{
+	FPSAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsDying"), true);
+	Enemy->SetFlipbook(EnemyDeath);
+	Enemy->SetLooping(false);
+}
+
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -87,15 +93,6 @@ void AEnemyCharacter::OrientTowardsPlayer()
 	const FRotator Rot = UKismetMathLibrary::FindLookAtRotation(EnemyLoc, PlayerCameraLoc);
 	const FRotator CurRot = GetActorRotation();
 	SetActorRotation(FRotator(CurRot.Pitch, Rot.Yaw - 90.f, CurRot.Roll));
-}
-
-void AEnemyCharacter::Death()
-{
-	if (GetAttributeSet()->GetHealth() <= 0.f) {
-		FPSAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsDying"), true);
-		Enemy->SetFlipbook(EnemyDeath);
-		Enemy->SetLooping(false);
-	}
 }
 
 void AEnemyCharacter::KillEnemy()
